@@ -1,26 +1,184 @@
 @import "tailwindcss";
 
+/* Add .dark to <html> (manually, or via next-themes later) to activate dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * RigiTrace token system.
+ * Architecture borrowed deliberately (raw HSL channels for opacity variants,
+ * tiered section surfaces, full dark-mode pairing) — palette is our own.
+ *
+ * Direction: precision / verification, not warmth. Cool neutrals, a single
+ * authoritative indigo brand accent, and a SEPARATE trust-status scale that
+ * is never reused for generic UI success/error — a product's trust status
+ * is domain data, not decoration.
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Page & surface — cool near-white, not cream */
+  --background:              210 25% 97%;
+  --foreground:               222 47% 11%;
+  --card:                       0 0% 100%;
+  --card-foreground:          222 47% 11%;
+  --surface-elevated:         210 20% 94%;
+  --muted:                    210 16% 93%;
+  --muted-foreground:         215 14% 40%;
+
+  /* Overlays */
+  --popover:                    0 0% 100%;
+  --popover-foreground:       222 47% 11%;
+
+  /* Actions — deep sapphire-indigo, institutional rather than SaaS-teal */
+  --primary:                  231 65% 42%;
+  --primary-foreground:         0 0% 100%;
+  --secondary:                210 20% 92%;
+  --secondary-foreground:     222 47% 11%;
+  --accent:                   210 20% 90%;
+  --accent-foreground:        222 47% 11%;
+  --destructive:                 0 72% 45%;
+  --destructive-foreground:     0 0% 100%;
+  --success:                  152 55% 34%;
+
+  /* Small accent text (eyebrow labels, inline links) — darker than --primary
+     to clear WCAG AA as small text on light surfaces. */
+  --eyebrow:                  231 65% 30%;
+
+  /* Structure */
+  --border:                   210 16% 85%;
+  --input:                    210 14% 82%;
+  --ring:                      231 65% 42%;
+
+  /* Section background tiers — visible alternation without hardcoded grays */
+  --section-base:   var(--background);
+  --section-raised: 210 20% 93%;
+  --section-card:      0 0% 100%;
+
+  /* ── Trust status scale — DOMAIN data, kept separate from --success/--destructive.
+     These describe a product's verification state, never a UI action outcome. */
+  --trust-high:        152 55% 32%;  /* verified, strong evidence            */
+  --trust-medium:       38 75% 40%;  /* partial evidence                     */
+  --trust-low:            0 68% 42%;  /* flagged / low confidence              */
+  --trust-unverified:  220  9% 46%;  /* no evidence yet                       */
+}
+
+.dark {
+  --background:               222 47% 6%;
+  --foreground:                210 20% 92%;
+  --card:                      222 40% 10%;
+  --card-foreground:          210 20% 92%;
+  --surface-elevated:          222 35% 14%;
+  --muted:                     222 30% 12%;
+  --muted-foreground:          215 12% 60%;
+
+  --popover:                   222 40% 10%;
+  --popover-foreground:       210 20% 92%;
+
+  --primary:                   231 70% 60%;
+  --primary-foreground:       222 47% 8%;
+  --secondary:                 222 30% 16%;
+  --secondary-foreground:     210 20% 92%;
+  --accent:                    222 32% 18%;
+  --accent-foreground:        210 20% 92%;
+  --destructive:                  0 70% 55%;
+  --destructive-foreground:     0 0% 100%;
+  --success:                   152 50% 48%;
+
+  --eyebrow:                   231 70% 68%;
+
+  --border:                    222 25% 22%;
+  --input:                     222 22% 24%;
+  --ring:                       231 70% 58%;
+
+  --section-raised: 222 32% 12%;
+  --section-card:   222 36% 15%;
+
+  --trust-high:        152 50% 48%;
+  --trust-medium:       38 70% 55%;
+  --trust-low:            0 65% 58%;
+  --trust-unverified:  220  9% 65%;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background:              hsl(var(--background));
+  --color-foreground:              hsl(var(--foreground));
+  --color-card:                    hsl(var(--card));
+  --color-card-foreground:         hsl(var(--card-foreground));
+  --color-surface-elevated:        hsl(var(--surface-elevated));
+  --color-muted:                   hsl(var(--muted));
+  --color-muted-foreground:        hsl(var(--muted-foreground));
+
+  --color-popover:                 hsl(var(--popover));
+  --color-popover-foreground:      hsl(var(--popover-foreground));
+
+  --color-primary:                 hsl(var(--primary));
+  --color-primary-foreground:      hsl(var(--primary-foreground));
+  --color-secondary:               hsl(var(--secondary));
+  --color-secondary-foreground:    hsl(var(--secondary-foreground));
+  --color-accent:                  hsl(var(--accent));
+  --color-accent-foreground:       hsl(var(--accent-foreground));
+  --color-destructive:             hsl(var(--destructive));
+  --color-destructive-foreground:  hsl(var(--destructive-foreground));
+  --color-success:                 hsl(var(--success));
+  --color-eyebrow:                 hsl(var(--eyebrow));
+
+  --color-border:                  hsl(var(--border));
+  --color-input:                   hsl(var(--input));
+  --color-ring:                    hsl(var(--ring));
+
+  --color-section-base:            hsl(var(--section-base));
+  --color-section-raised:          hsl(var(--section-raised));
+  --color-section-card:            hsl(var(--section-card));
+
+  /* Trust status scale — used by TrustBadge, evidence timelines, etc. */
+  --color-trust-high:              hsl(var(--trust-high));
+  --color-trust-medium:            hsl(var(--trust-medium));
+  --color-trust-low:               hsl(var(--trust-low));
+  --color-trust-unverified:        hsl(var(--trust-unverified));
+
+  /* Radius — tighter than a typical SaaS scale on purpose: crisp / stamp-like
+     rather than soft-rounded, matching a verification-mark register. */
+  --radius-sm: 0.25rem;   /* badges, pills           */
+  --radius:    0.5rem;    /* buttons, inputs (base)  */
+  --radius-lg: 0.75rem;   /* cards, panels           */
+  --radius-xl: 1rem;      /* large feature blocks    */
+
+  /* Geist, wired via next/font/google in layout.tsx — functional placeholder.
+     A deliberate display/body pairing for RigiTrace's own identity is still
+     an open decision, not a final choice — revisit before shipping. */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up:   accordion-up   0.2s ease-out;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.32, 0.72, 0, 1) both;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes accordion-down {
+  from { height: 0; overflow: hidden; }
+  to   { height: var(--radix-accordion-content-height); overflow: hidden; }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); overflow: hidden; }
+  to   { height: 0; overflow: hidden; }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.section-y {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+@media (min-width: 768px) {
+  .section-y {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
 }
