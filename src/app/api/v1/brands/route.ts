@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 import type { Brand } from "@/lib/types/entities";
+import { addBrand, listBrands } from "@/lib/mock/brandStore";
 
-/**
- * LOCAL MOCK ONLY.
- *
- * Stands in for the real backend until your colleague has one running.
- * Path is /api/v1/brands — the exact path in docs/API_CONTRACT.md — so
- * switching to the real backend later is just changing
- * NEXT_PUBLIC_API_BASE_URL, not touching any frontend code.
- */
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const status = searchParams.get("status") as Brand["status"] | null;
+  const results = listBrands(status ?? undefined);
+  return NextResponse.json({ data: results, page: 1, limit: results.length, total: results.length });
+}
+
 export async function POST(request: Request) {
   const body = await request.json();
 
@@ -30,5 +30,6 @@ export async function POST(request: Request) {
     updatedAt: new Date().toISOString(),
   };
 
+  addBrand(brand);
   return NextResponse.json(brand, { status: 201 });
 }
