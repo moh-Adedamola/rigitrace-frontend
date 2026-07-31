@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, FormEvent, ChangeEvent } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
@@ -123,6 +124,12 @@ export function ProductCreationForm() {
             {publishing ? "Publishing…" : "Publish product"}
           </Button>
         )}
+        <Link
+          href={`/brand/products/${product.id}`}
+          className="mt-3 block text-sm text-primary underline"
+        >
+          View product & manage evidence →
+        </Link>
         {submitError && <p className="mt-2 text-sm text-destructive">{submitError}</p>}
       </div>
     );

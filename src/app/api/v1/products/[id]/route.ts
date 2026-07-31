@@ -1,5 +1,17 @@
 import { NextResponse } from "next/server";
-import { updateProduct } from "@/lib/mock/productStore";
+import { findProduct, updateProduct } from "@/lib/mock/productStore";
+
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const product = findProduct(id);
+  if (!product) {
+    return NextResponse.json(
+      { error: { code: "PRODUCT_NOT_FOUND", message: "Product not found." } },
+      { status: 404 }
+    );
+  }
+  return NextResponse.json(product);
+}
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
