@@ -71,7 +71,7 @@ export default function MarketingHomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="section-y">
+      <section className="pt-16 pb-10 md:pt-24 md:pb-14">
         <div className="mx-auto max-w-6xl px-4 text-center">
           <h1 className="mx-auto max-w-3xl font-serif text-3xl font-semibold leading-tight text-foreground md:text-5xl">
             Know what you&apos;re buying.
@@ -83,11 +83,18 @@ export default function MarketingHomePage() {
           <div className="mt-8">
             <ProductSearch />
           </div>
+          <a
+            href="#how-it-works"
+            className="mt-12 inline-flex flex-col items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-eyebrow animate-fade-up"
+          >
+            <span>How it works</span>
+            <ChevronDownIcon />
+          </a>
         </div>
       </section>
 
       {/* How it works */}
-      <section className="section-y bg-section-raised">
+      <section id="how-it-works" className="section-y bg-section-raised">
         <div className="mx-auto max-w-6xl px-4">
           <p className="text-center text-xs font-semibold uppercase tracking-wide text-eyebrow">
             How it works
@@ -219,6 +226,24 @@ export default function MarketingHomePage() {
         </div>
       </section>
     </>
+  );
+}
+
+function ChevronDownIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 8l5 5 5-5" />
+    </svg>
   );
 }
 
