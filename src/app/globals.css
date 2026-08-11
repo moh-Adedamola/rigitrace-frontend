@@ -142,11 +142,13 @@
   --radius-lg: 0.75rem;   /* cards, panels           */
   --radius-xl: 1rem;      /* large feature blocks    */
 
-  /* Geist, wired via next/font/google in layout.tsx — functional placeholder.
-     A deliberate display/body pairing for RigiTrace's own identity is still
-     an open decision, not a final choice — revisit before shipping. */
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* IBM Plex family, wired via next/font/google in layout.tsx.
+     Sans: all UI and body text. Serif: marketing display headings only
+     (font-serif, applied per component — never inside the portals). Mono:
+     values, not prose — barcodes, product IDs, trust scores, timestamps. */
+  --font-sans:  var(--font-plex-sans);
+  --font-serif: var(--font-plex-serif);
+  --font-mono:  var(--font-plex-mono);
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up:   accordion-up   0.2s ease-out;
