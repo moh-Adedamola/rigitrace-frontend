@@ -19,21 +19,28 @@ export function BrandApprovalQueue() {
   const [error, setError] = useState<string | null>(null);
   const [actingOn, setActingOn] = useState<string | null>(null);
 
-  async function loadPendingBrands() {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await apiFetch<ListResponse<Brand>>("/api/v1/brands?status=pending");
-      setBrands(res.data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load brands.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
+    let cancelled = false;
+
+    async function loadPendingBrands() {
+      try {
+        const res = await apiFetch<ListResponse<Brand>>("/api/v1/brands?status=pending");
+        if (cancelled) return;
+        setBrands(res.data);
+        setError(null);
+      } catch (err) {
+        if (cancelled) return;
+        setError(err instanceof Error ? err.message : "Failed to load brands.");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+
     loadPendingBrands();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   async function handleDecision(id: string, status: "approved" | "suspended") {
