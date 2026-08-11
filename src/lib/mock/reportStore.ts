@@ -1,6 +1,8 @@
 import type { Report, ReportStatus } from "@/lib/types/entities";
+import { SEED_ENABLED, SEED_REPORTS } from "@/lib/mock/seedData";
 
-const reports: Report[] = [];
+// Seeded with demo data at module init — see seedData.ts.
+const reports: Report[] = SEED_ENABLED ? [...SEED_REPORTS] : [];
 
 // A freshly submitted report is anonymous and unreviewed — counting it would
 // let anyone tank a competitor's score by filing reports in a loop. Only

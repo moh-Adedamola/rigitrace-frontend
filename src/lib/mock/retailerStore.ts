@@ -1,6 +1,8 @@
 import type { Retailer } from "@/lib/types/entities";
+import { SEED_ENABLED, SEED_RETAILERS } from "@/lib/mock/seedData";
 
-const retailers: Retailer[] = [];
+// Seeded with demo data at module init — see seedData.ts.
+const retailers: Retailer[] = SEED_ENABLED ? [...SEED_RETAILERS] : [];
 
 export function listRetailers(status?: Retailer["status"]): Retailer[] {
   return status ? retailers.filter((r) => r.status === status) : retailers;

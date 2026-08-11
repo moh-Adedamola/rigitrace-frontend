@@ -1,6 +1,8 @@
 import type { RetailerProductLink } from "@/lib/types/entities";
+import { SEED_ENABLED, SEED_RETAILER_PRODUCT_LINKS } from "@/lib/mock/seedData";
 
-const links: RetailerProductLink[] = [];
+// Seeded with demo data at module init — see seedData.ts.
+const links: RetailerProductLink[] = SEED_ENABLED ? [...SEED_RETAILER_PRODUCT_LINKS] : [];
 
 export function addLink(link: RetailerProductLink): RetailerProductLink {
   links.push(link);

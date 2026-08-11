@@ -1,6 +1,10 @@
 import type { Product, ProductVersion } from "@/lib/types/entities";
+import { SEED_ENABLED, SEED_PRODUCTS } from "@/lib/mock/seedData";
 
-const products: Product[] = [];
+// Seeded with demo data at module init — see seedData.ts. No seed
+// ProductVersion history: nothing displays it yet (progress-tracker.md),
+// and every seeded product is its own first version.
+const products: Product[] = SEED_ENABLED ? [...SEED_PRODUCTS] : [];
 const versions: ProductVersion[] = [];
 
 export function listProducts(brandId?: string): Product[] {
