@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { TrustBadgeSummary } from "@/components/trust/TrustBadge";
+import { ProductImage } from "@/components/product/ProductImage";
 import { apiFetch } from "@/lib/api/client";
 import type { Brand, Product, TrustScore } from "@/lib/types/entities";
 
@@ -109,20 +110,28 @@ export function ProductSearch() {
             <li key={product.id}>
               <Link
                 href={`/verify/${product.id}`}
-                className="block rounded-lg border border-border bg-card p-3 text-left text-sm text-foreground hover:border-primary"
+                className="flex gap-3 rounded-lg border border-border bg-card p-3 text-left text-sm text-foreground hover:border-primary"
               >
-                <div className="flex items-baseline justify-between gap-2">
-                  <span className="font-medium">{product.name}</span>
-                  <span className="shrink-0 text-xs text-muted-foreground">{product.category}</span>
-                </div>
-                {product.brandName && (
-                  <p className="mt-0.5 text-xs text-muted-foreground">{product.brandName}</p>
-                )}
-                {product.trustScore && (
-                  <div className="mt-2">
-                    <TrustBadgeSummary trustScore={product.trustScore} />
+                <ProductImage
+                  images={product.images}
+                  category={product.category}
+                  name={product.name}
+                  className="h-12 w-12 shrink-0"
+                />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="font-medium">{product.name}</span>
+                    <span className="shrink-0 text-xs text-muted-foreground">{product.category}</span>
                   </div>
-                )}
+                  {product.brandName && (
+                    <p className="mt-0.5 text-xs text-muted-foreground">{product.brandName}</p>
+                  )}
+                  {product.trustScore && (
+                    <div className="mt-2">
+                      <TrustBadgeSummary trustScore={product.trustScore} />
+                    </div>
+                  )}
+                </div>
               </Link>
             </li>
           ))}

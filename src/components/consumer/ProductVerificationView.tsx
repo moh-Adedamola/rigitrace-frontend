@@ -5,6 +5,7 @@ import { StatusPill } from "@/components/status/StatusPill";
 import { TrustBadge } from "@/components/trust/TrustBadge";
 import { EvidenceTimeline } from "@/components/evidence/EvidenceTimeline";
 import { ReportForm } from "@/components/forms/ReportForm";
+import { ProductImage } from "@/components/product/ProductImage";
 import { apiFetch } from "@/lib/api/client";
 import type { Product, Evidence, TrustScore, Retailer } from "@/lib/types/entities";
 
@@ -68,15 +69,23 @@ export function ProductVerificationView({ productId }: { productId: string }) {
 
   return (
     <div className="space-y-8">
-      <div>
-        <div className="mb-1 flex items-center gap-2">
-          <h1 className="text-2xl font-semibold text-foreground">{product.name}</h1>
-          <StatusPill status={product.status} />
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+        <ProductImage
+          images={product.images}
+          category={product.category}
+          name={product.name}
+          className="h-24 w-24 shrink-0 sm:h-32 sm:w-32"
+        />
+        <div className="min-w-0">
+          <div className="mb-1 flex items-center gap-2">
+            <h1 className="text-2xl font-semibold text-foreground">{product.name}</h1>
+            <StatusPill status={product.status} />
+          </div>
+          <p className="text-sm text-muted-foreground">
+            {product.category}
+            {product.barcode ? ` · Barcode: ${product.barcode}` : ""}
+          </p>
         </div>
-        <p className="text-sm text-muted-foreground">
-          {product.category}
-          {product.barcode ? ` · Barcode: ${product.barcode}` : ""}
-        </p>
       </div>
 
       <section>
