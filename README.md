@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RigiTrace
 
-## Getting Started
+RigiTrace is product trust infrastructure: consumers verify a product's identity and
+see the evidence behind its trust score, without an account. Brands, retailers, and
+regulators contribute evidence that feeds that score.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts: `npm run build`, `npm run start`, `npm run lint`, `npm run typecheck`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Architecture
 
-## Learn More
+This repository is the **frontend**, plus a **temporary in-repo mock backend**. A real
+backend is being built separately.
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/api/v1/` implements the API contract as Next.js route handlers.
+- `src/lib/mock/` backs those route handlers with plain in-memory arrays — there is no
+  database.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### The mock backend does not persist data
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The in-memory arrays in `src/lib/mock/` live only in the memory of the process that
+created them. On Vercel, route handlers run as serverless functions: each request may
+be served by a different instance with its own memory. Data written in one request is
+not guaranteed to be visible on the next, and is reliably gone after the instance is
+recycled.
 
-## Deploy on Vercel
+Locally, with a single long-running `next dev` process, this is easy to miss — the app
+behaves as if it remembers everything. **On the deployed environment, it does not.** A
+brand, product, or piece of evidence created during one visit can vanish before the
+next. Anyone demoing the deployed site — especially to a pilot brand or partner — should
+know this going in: the deployment is for reviewing screens and flows, not for
+persisting real data.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This is scaffolding with a known expiry date. Once the real backend is ready,
+`src/app/api/v1/` and `src/lib/mock/` are deleted, and the frontend points at it
+instead.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment variables
+
+See `.env.example`. `NEXT_PUBLIC_API_BASE_URL` must be set explicitly — an empty
+string means "use this app's own mock API route handlers"; it does not default
+silently to another value.
