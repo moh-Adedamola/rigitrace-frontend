@@ -26,8 +26,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ data: results, page: 1, limit: results.length, total: results.length });
   }
 
-  return NextResponse.json(
-    { error: { code: "VALIDATION_ERROR", message: "Provide a barcode or query parameter." } },
-    { status: 400 }
-  );
+  // No filters — browse mode, returns all published products. Used by the
+  // retailer product-linking flow to pick from a list rather than search.
+  return NextResponse.json({ data: published, page: 1, limit: published.length, total: published.length });
 }

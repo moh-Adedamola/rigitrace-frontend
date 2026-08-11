@@ -6,7 +6,7 @@ import { TrustBadge } from "@/components/trust/TrustBadge";
 import { EvidenceTimeline } from "@/components/evidence/EvidenceTimeline";
 import { ReportForm } from "@/components/forms/ReportForm";
 import { apiFetch } from "@/lib/api/client";
-import type { Product, Evidence, TrustScore } from "@/lib/types/entities";
+import type { Product, Evidence, TrustScore, Retailer } from "@/lib/types/entities";
 
 interface ListResponse<T> {
   data: T[];
@@ -16,6 +16,7 @@ export function ProductVerificationView({ productId }: { productId: string }) {
   const [product, setProduct] = useState<Product | null>(null);
   const [evidence, setEvidence] = useState<Evidence[]>([]);
   const [trustScore, setTrustScore] = useState<TrustScore | null>(null);
+  const [retailers, setRetailers] = useState<Retailer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,14 +25,16 @@ export function ProductVerificationView({ productId }: { productId: string }) {
       setLoading(true);
       setError(null);
       try {
-        const [productRes, evidenceRes, trustRes] = await Promise.all([
+        const [productRes, evidenceRes, trustRes, retailersRes] = await Promise.all([
           apiFetch<Product>(`/api/v1/products/${productId}`),
           apiFetch<ListResponse<Evidence>>(`/api/v1/products/${productId}/evidence`),
           apiFetch<TrustScore>(`/api/v1/products/${productId}/trust-score`),
+          apiFetch<ListResponse<Retailer>>(`/api/v1/products/${productId}/retailers`),
         ]);
         setProduct(productRes);
         setEvidence(evidenceRes.data);
         setTrustScore(trustRes);
+        setRetailers(retailersRes.data);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load product.");
       } finally {
@@ -63,6 +66,27 @@ export function ProductVerificationView({ productId }: { productId: string }) {
           Trust status
         </h2>
         {trustScore && <TrustBadge trustScore={trustScore} />}
+      </section>
+
+      <section>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-eyebrow">
+          Available at
+        </h2>
+        {retailers.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No verified retailers linked yet.</p>
+        ) : (
+          <ul className="space-y-2">
+            {retailers.map((r) => (
+              <li
+                key={r.id}
+                className="rounded-lg border border-border bg-card p-3 text-sm text-foreground"
+              >
+                <span className="font-medium">{r.name}</span>
+                <span className="ml-2 text-muted-foreground">{r.type.replace("_", " ")}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <section>
