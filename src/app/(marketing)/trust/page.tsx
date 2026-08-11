@@ -234,10 +234,11 @@ export default function TrustPage() {
             </li>
             <li>
               <span className="font-medium text-foreground">
-                No unresolved reports against it.
+                No reports under active investigation.
               </span>{" "}
-              This doesn&apos;t add points on top of everything else — but unresolved
-              reports would subtract from the score if there were any. See below.
+              This doesn&apos;t add points on top of everything else — but a report that
+              a person has reviewed and moved into active investigation would subtract
+              from the score. See below.
             </li>
           </ul>
         </div>
@@ -256,18 +257,17 @@ export default function TrustPage() {
               complete one, even for a fully verified brand.
             </li>
             <li>
-              <span className="font-medium text-foreground">Unresolved reports.</span>{" "}
-              Reports filed against a product and left unresolved are designed to reduce
-              its score, up to a cap — the more of them there are, the larger the
-              reduction.
+              <span className="font-medium text-foreground">Reports under investigation.</span>{" "}
+              Filing a report never moves a score by itself. Reporting requires no
+              account, so every report is reviewed by a person before it can affect
+              anything — during the pilot, that review is manual. Only once we&apos;ve
+              looked at a report and moved it into active investigation does it reduce
+              the product&apos;s score, up to a cap — the more of them there are, the
+              larger the reduction. A report that&apos;s reviewed and resolved or
+              dismissed no longer counts. This means one anonymous, unreviewed report
+              can&apos;t be used to tank a competitor&apos;s score.
             </li>
           </ul>
-          <p className="mx-auto mt-6 max-w-xl rounded-lg border border-border bg-section-raised p-4 text-xs text-muted-foreground">
-            <span className="font-medium text-foreground">Not yet live:</span> during the
-            pilot, reports are reviewed by our team rather than automatically factored
-            into the score. This is rolling out as case management goes live — we&apos;re
-            not counting it until it&apos;s real.
-          </p>
         </div>
       </section>
 
@@ -329,9 +329,11 @@ export default function TrustPage() {
               than either alone.
             </li>
             <li>
-              <span className="font-medium text-foreground">4. Resolve outstanding reports</span>.
-              Once case management is live, unresolved reports will actively count
-              against a score — dealing with them early is worth doing regardless.
+              <span className="font-medium text-foreground">4. Respond to any reports</span>{" "}
+              filed against your product. A report that&apos;s resolved or dismissed no
+              longer counts against the score — the tools for handling that end to end
+              are still being built, but this is designed to reward addressing a
+              problem, not just avoiding one.
             </li>
           </ol>
         </div>

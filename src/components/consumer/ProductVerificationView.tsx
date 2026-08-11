@@ -19,6 +19,7 @@ export function ProductVerificationView({ productId }: { productId: string }) {
   const [retailers, setRetailers] = useState<Retailer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [recalculating, setRecalculating] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -44,6 +45,23 @@ export function ProductVerificationView({ productId }: { productId: string }) {
     load();
   }, [productId]);
 
+  async function handleReportSubmitted() {
+    // A new report changes the picture — recalculate rather than let the
+    // badge silently go stale. Mirrors ProductDetailClient's evidence flow.
+    setRecalculating(true);
+    try {
+      const updated = await apiFetch<TrustScore>(
+        `/api/v1/products/${productId}/trust-score/recalculate`,
+        { method: "POST" }
+      );
+      setTrustScore(updated);
+    } catch {
+      // Non-fatal — the report is still saved even if recalculation fails.
+    } finally {
+      setRecalculating(false);
+    }
+  }
+
   if (loading) return <p className="text-sm text-muted-foreground">Loading…</p>;
   if (error) return <p className="text-sm text-destructive">{error}</p>;
   if (!product) return <p className="text-sm text-muted-foreground">Product not found.</p>;
@@ -63,7 +81,7 @@ export function ProductVerificationView({ productId }: { productId: string }) {
 
       <section>
         <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-eyebrow">
-          Trust status
+          Trust status {recalculating && "(recalculating…)"}
         </h2>
         {trustScore && <TrustBadge trustScore={trustScore} />}
       </section>
@@ -97,7 +115,7 @@ export function ProductVerificationView({ productId }: { productId: string }) {
       </section>
 
       <section>
-        <ReportForm productId={productId} />
+        <ReportForm productId={productId} onSubmitted={handleReportSubmitted} />
       </section>
     </div>
   );

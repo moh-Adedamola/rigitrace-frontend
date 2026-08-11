@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { findProduct } from "@/lib/mock/productStore";
 import { findBrand } from "@/lib/mock/brandStore";
 import { listEvidence } from "@/lib/mock/evidenceStore";
+import { countReportsUnderReview } from "@/lib/mock/reportStore";
 import { calculateTrustScore } from "@/lib/trust/calculateTrustScore";
 import { addTrustScore } from "@/lib/mock/trustStore";
 import type { TrustScore } from "@/lib/types/entities";
@@ -25,7 +26,8 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   }
 
   const evidence = listEvidence(id);
-  const result = calculateTrustScore(product, brand, evidence);
+  const reportCount = countReportsUnderReview(id);
+  const result = calculateTrustScore(product, brand, evidence, reportCount);
 
   const trustScore: TrustScore = {
     id: crypto.randomUUID(),

@@ -8,7 +8,12 @@ import { FieldError } from "@/components/ui/FieldError";
 import { apiFetch } from "@/lib/api/client";
 import type { Report } from "@/lib/types/entities";
 
-export function ReportForm({ productId }: { productId: string }) {
+interface Props {
+  productId: string;
+  onSubmitted?: (report: Report) => void;
+}
+
+export function ReportForm({ productId, onSubmitted }: Props) {
   const [open, setOpen] = useState(false);
   const [description, setDescription] = useState("");
   const [contact, setContact] = useState("");
@@ -34,6 +39,7 @@ export function ReportForm({ productId }: { productId: string }) {
         }),
       });
       setSubmitted(report);
+      onSubmitted?.(report);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to submit report.");
     } finally {

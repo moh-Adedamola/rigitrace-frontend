@@ -7,10 +7,14 @@ import type { Brand, Evidence, Product, TrustFactor, TrustScore, TrustStatus } f
  * always produces the same output — which is what makes a trust score
  * "always recalculatable from evidence," as the PRD requires.
  *
- * `reportCount` defaults to 0 because Case Management (PRD Stage 6)
- * doesn't exist yet — this parameter exists so wiring in real report
- * counts later is a one-line change at the call site, not a rewrite
- * of this function.
+ * `reportCount` defaults to 0 for callers with no report data. Both live
+ * call sites now pass `countReportsUnderReview()` (see `reportStore.ts`),
+ * which only counts reports a person has moved to "under_investigation" —
+ * a freshly submitted, unreviewed report must never lower a score, since
+ * reporting requires no account and would otherwise be a free way to tank
+ * a competitor. In practice this is still always 0 today: nothing can move
+ * a report to "under_investigation" until Case Management (PRD Stage 6,
+ * blocked on auth) ships a resolution endpoint.
  */
 export function calculateTrustScore(
   product: Product,
