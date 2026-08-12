@@ -1,5 +1,6 @@
 import { BrandApprovalQueue } from "@/components/admin/BrandApprovalQueue";
 import { RetailerApprovalQueue } from "@/components/admin/RetailerApprovalQueue";
+import { EventTimeline } from "@/components/events/EventTimeline";
 
 export default function AdminDashboardPage() {
   return (
@@ -27,6 +28,13 @@ export default function AdminDashboardPage() {
             Retailer approvals
           </h2>
           <RetailerApprovalQueue />
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-eyebrow">
+            Recent activity
+          </h2>
+          <EventTimeline limit={20} />
         </section>
       </div>
     </main>

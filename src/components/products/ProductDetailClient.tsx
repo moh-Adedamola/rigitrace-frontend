@@ -5,6 +5,7 @@ import { StatusPill } from "@/components/status/StatusPill";
 import { TrustBadge } from "@/components/trust/TrustBadge";
 import { EvidenceTimeline } from "@/components/evidence/EvidenceTimeline";
 import { EvidenceSubmissionForm } from "@/components/forms/EvidenceSubmissionForm";
+import { EventTimeline } from "@/components/events/EventTimeline";
 import { apiFetch } from "@/lib/api/client";
 import type { Product, Evidence, TrustScore } from "@/lib/types/entities";
 
@@ -89,6 +90,13 @@ export function ProductDetailClient({ productId }: { productId: string }) {
           Evidence history
         </h2>
         <EvidenceTimeline evidence={evidence} />
+      </section>
+
+      <section>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-eyebrow">
+          Activity history
+        </h2>
+        <EventTimeline entityType="product" entityId={productId} />
       </section>
 
       <section>
