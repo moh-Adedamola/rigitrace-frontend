@@ -234,11 +234,11 @@ export default function TrustPage() {
             </li>
             <li>
               <span className="font-medium text-foreground">
-                No reports under active investigation.
+                No reports counted against it.
               </span>{" "}
-              This doesn&apos;t add points on top of everything else — but a report that
-              a person has reviewed and moved into active investigation would subtract
-              from the score. See below.
+              This doesn&apos;t add points on top of everything else — but once report
+              review is built, a reviewed and confirmed report would subtract from the
+              score. See below for where that stands today.
             </li>
           </ul>
         </div>
@@ -257,15 +257,14 @@ export default function TrustPage() {
               complete one, even for a fully verified brand.
             </li>
             <li>
-              <span className="font-medium text-foreground">Reports under investigation.</span>{" "}
-              Filing a report never moves a score by itself. Reporting requires no
-              account, so every report is reviewed by a person before it can affect
-              anything — during the pilot, that review is manual. Only once we&apos;ve
-              looked at a report and moved it into active investigation does it reduce
-              the product&apos;s score, up to a cap — the more of them there are, the
-              larger the reduction. A report that&apos;s reviewed and resolved or
-              dismissed no longer counts. This means one anonymous, unreviewed report
-              can&apos;t be used to tank a competitor&apos;s score.
+              <span className="font-medium text-foreground">Reports, once reviewed.</span>{" "}
+              Filing a report never moves a score by itself — it&apos;s recorded against
+              the product, nothing more. Reporting requires no account, so counting every
+              submission automatically would make it trivial to file reports against a
+              competitor and drag their score down instead. The scoring system only
+              counts a report once it&apos;s been reviewed and confirmed — reviewing
+              reports is planned, but that process isn&apos;t built yet, so as things
+              stand, no report currently affects any product&apos;s score.
             </li>
           </ul>
         </div>
@@ -329,27 +328,14 @@ export default function TrustPage() {
               than either alone.
             </li>
             <li>
-              <span className="font-medium text-foreground">4. Respond to any reports</span>{" "}
-              filed against your product. A report that&apos;s resolved or dismissed no
-              longer counts against the score — the tools for handling that end to end
-              are still being built, but this is designed to reward addressing a
-              problem, not just avoiding one.
+              <span className="font-medium text-foreground">4. Reports aren&apos;t worth
+                acting on for your score yet</span>{" "}
+              — reviewing reports so they can count isn&apos;t built, so right now, filed
+              reports have no effect on any product&apos;s score, resolved or not. Once
+              that&apos;s live, this is designed to reward addressing a problem, not just
+              avoiding one.
             </li>
           </ol>
-        </div>
-      </section>
-
-      {/* Challenge a score */}
-      <section className="section-y">
-        <div className="mx-auto max-w-2xl px-4 text-center">
-          <h2 className="font-serif text-2xl font-semibold text-foreground md:text-3xl">
-            If you think a score is wrong
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
-            Email us at [PLACEHOLDER] with the product and what you believe is
-            inaccurate. During the pilot, every challenge is reviewed by a person, not
-            resolved by an algorithm you can&apos;t reach.
-          </p>
         </div>
       </section>
 

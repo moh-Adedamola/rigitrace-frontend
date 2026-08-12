@@ -37,10 +37,6 @@ export default async function JoinPilotPage({
         <div className="mt-8">
           <PilotApplicationForm applicantType={applicantType} />
         </div>
-        {/* PLACEHOLDER: fill in the real support/contact email address */}
-        <p className="mt-4 text-sm text-muted-foreground">
-          Prefer email? Reach us at [PLACEHOLDER]
-        </p>
       </div>
     </div>
   );
