@@ -78,10 +78,16 @@ export function PilotApplicationForm({ applicantType }: { applicantType?: Applic
   if (submitted) {
     return (
       <div className="rounded-lg border border-border bg-card p-6">
-        <h2 className="text-lg font-semibold text-foreground">Application received</h2>
+        <h2 className="text-lg font-semibold text-foreground">Use email instead</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Thank you, {submitted.name} — we&apos;ll be in touch at {submitted.contactEmail} about
-          joining the pilot.
+          This form doesn&apos;t reach anyone yet — email{" "}
+          <a
+            href="mailto:rigitrace@gmail.com"
+            className="text-eyebrow underline-offset-4 hover:underline"
+          >
+            rigitrace@gmail.com
+          </a>{" "}
+          directly instead.
         </p>
       </div>
     );
@@ -89,6 +95,17 @@ export function PilotApplicationForm({ applicantType }: { applicantType?: Applic
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md space-y-4" noValidate>
+      <p className="text-sm text-muted-foreground">
+        This form doesn&apos;t reach anyone yet — email{" "}
+        <a
+          href="mailto:rigitrace@gmail.com"
+          className="text-eyebrow underline-offset-4 hover:underline"
+        >
+          rigitrace@gmail.com
+        </a>{" "}
+        directly instead.
+      </p>
+
       <div>
         <Label htmlFor="name">Your name</Label>
         <Input

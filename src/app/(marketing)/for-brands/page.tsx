@@ -21,10 +21,6 @@ const CONTENT: BusinessCasePageContent = {
       body: "Not a subscription tier — customers see the same score whether you're on the pilot or paying nothing at all.",
     },
     {
-      title: "Visibility into reports",
-      body: "See what's been flagged against your products so you can respond, instead of finding out secondhand.",
-    },
-    {
       title: "A dashboard we're building with you",
       body: "Product management and deeper trust insights are on the roadmap, shaped by what founding pilot brands actually need.",
     },
@@ -68,7 +64,7 @@ const CONTENT: BusinessCasePageContent = {
   ctaHref: "/join-pilot?type=brand",
   ctaLabel: "Join the pilot",
   ctaSupportingText:
-    "Applications are reviewed by hand — tell us about your brand and we'll take it from there.",
+    "There's no self-serve signup — tell us about your brand, or email rigitrace@gmail.com directly.",
 };
 
 export default function ForBrandsPage() {

@@ -68,7 +68,7 @@ const CONTENT: BusinessCasePageContent = {
   ctaHref: "/join-pilot?type=retailer",
   ctaLabel: "Join the pilot",
   ctaSupportingText:
-    "Applications are reviewed by hand — tell us about your store and we'll take it from there.",
+    "There's no self-serve signup — tell us about your store, or email rigitrace@gmail.com directly.",
 };
 
 export default function ForRetailersPage() {

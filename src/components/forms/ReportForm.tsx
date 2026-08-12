@@ -51,7 +51,8 @@ export function ReportForm({ productId, onSubmitted }: Props) {
     return (
       <div className="rounded-lg border border-border bg-card p-4">
         <p className="text-sm text-foreground">
-          Thank you — your report has been submitted and will be reviewed.
+          Thank you — your report is recorded. Review isn&apos;t built yet, so nothing acts
+          on it automatically.
         </p>
       </div>
     );
@@ -85,7 +86,7 @@ export function ReportForm({ productId, onSubmitted }: Props) {
           id="contact"
           value={contact}
           onChange={(e) => setContact(e.target.value)}
-          placeholder="Email or phone, if you'd like a follow-up"
+          placeholder="Email or phone, recorded with your report"
         />
       </div>
       <div className="flex gap-2">

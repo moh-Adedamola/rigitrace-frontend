@@ -30,9 +30,16 @@ export default async function JoinPilotPage({
           {heading}
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          We&apos;re onboarding a small group of founding brands and retailers by hand
-          before RigiTrace opens up more broadly. Tell us about yours, and our team will
-          reach out to get you set up — there&apos;s no self-serve signup yet.
+          We&apos;re onboarding a small group of founding brands and retailers by hand,
+          before RigiTrace opens up more broadly — there&apos;s no self-serve signup yet.
+          Tell us about yours below, or email{" "}
+          <a
+            href="mailto:rigitrace@gmail.com"
+            className="text-eyebrow underline-offset-4 hover:underline"
+          >
+            rigitrace@gmail.com
+          </a>{" "}
+          directly.
         </p>
         <div className="mt-8">
           <PilotApplicationForm applicantType={applicantType} />

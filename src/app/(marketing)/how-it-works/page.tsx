@@ -174,8 +174,8 @@ export default function HowItWorksPage() {
           </h2>
           <div className="mt-6 space-y-4 text-sm text-muted-foreground md:text-base">
             <p>
-              Anyone can report a product — no account needed, and leaving contact details is
-              optional, only useful if you&apos;d like us to follow up.
+              Anyone can report a product — no account needed. Leaving contact details is
+              optional; they&apos;re recorded with the report, not acted on yet.
             </p>
             <p>
               A report gets recorded against the product. Filing one doesn&apos;t move a score

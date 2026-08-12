@@ -74,8 +74,15 @@ export function RetailerRegistrationForm() {
           <StatusPill status={retailer.status} />
         </div>
         <p className="text-sm text-muted-foreground">
-          {retailer.name} has been submitted for review. We&apos;ll notify {retailer.contactEmail} once
-          an admin approves it.
+          {retailer.name} has been submitted for review. There&apos;s no notification yet —
+          check back here, or email{" "}
+          <a
+            href="mailto:rigitrace@gmail.com"
+            className="text-eyebrow underline-offset-4 hover:underline"
+          >
+            rigitrace@gmail.com
+          </a>{" "}
+          for an update.
         </p>
       </div>
     );
