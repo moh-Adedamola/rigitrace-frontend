@@ -143,7 +143,10 @@ export interface EventLogEntry {
   entityId: UUID;
   action: string; // e.g. "brand_approved", "product_published"
   actorId: UUID;
-  actorRole: "admin" | "brand" | "retailer" | "system";
+  // "consumer" | "manufacturer" | "regulator" cover EvidenceSource actors
+  // and anonymous report submitters — added alongside admin/brand/retailer/
+  // system so every real actor kind has an honest value to log.
+  actorRole: "admin" | "brand" | "retailer" | "consumer" | "manufacturer" | "regulator" | "system";
   description: string; // human-readable, e.g. "Brand approved by Admin"
   createdAt: ISODateString;
 }

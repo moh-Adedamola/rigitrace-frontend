@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import type { Report } from "@/lib/types/entities";
+import type { EventLogEntry, Report } from "@/lib/types/entities";
 import { addReport, listReports } from "@/lib/mock/reportStore";
 import { findProduct } from "@/lib/mock/productStore";
+import { addEvent } from "@/lib/mock/eventLogStore";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -39,5 +40,21 @@ export async function POST(request: Request) {
   };
 
   addReport(report);
+
+  const event: EventLogEntry = {
+    id: crypto.randomUUID(),
+    entityType: "report",
+    entityId: report.id,
+    action: "report_submitted",
+    // Reports stay anonymous-capable by design (AGENTS.md rule 4) — this
+    // isn't a gap auth will close later, unlike the "unknown" fallbacks
+    // elsewhere in this file's siblings.
+    actorId: "anonymous",
+    actorRole: "consumer",
+    description: `Report submitted against ${product.name}.`,
+    createdAt: new Date().toISOString(),
+  };
+  addEvent(event);
+
   return NextResponse.json(report, { status: 201 });
 }

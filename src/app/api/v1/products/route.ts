@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import type { Product } from "@/lib/types/entities";
+import type { EventLogEntry, Product } from "@/lib/types/entities";
 import { addProduct, listProducts } from "@/lib/mock/productStore";
 import { findBrand } from "@/lib/mock/brandStore";
+import { addEvent } from "@/lib/mock/eventLogStore";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -41,5 +42,20 @@ export async function POST(request: Request) {
   };
 
   addProduct(product);
+
+  const event: EventLogEntry = {
+    id: crypto.randomUUID(),
+    entityType: "product",
+    entityId: product.id,
+    action: "product_created",
+    // No actorId sent yet — the approved brand that just passed the check
+    // above is who acted, even without a session to name a specific user.
+    actorId: body.actorId ?? body.brandId,
+    actorRole: "brand",
+    description: `${product.name} created by ${brand.name}.`,
+    createdAt: new Date().toISOString(),
+  };
+  addEvent(event);
+
   return NextResponse.json(product, { status: 201 });
 }

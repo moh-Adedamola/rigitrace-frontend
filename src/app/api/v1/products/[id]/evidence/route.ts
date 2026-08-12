@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import type { Evidence } from "@/lib/types/entities";
+import type { Evidence, EventLogEntry } from "@/lib/types/entities";
 import { addEvidence, listEvidence } from "@/lib/mock/evidenceStore";
 import { findProduct } from "@/lib/mock/productStore";
+import { addEvent } from "@/lib/mock/eventLogStore";
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -40,5 +41,18 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   };
 
   addEvidence(evidence);
+
+  const event: EventLogEntry = {
+    id: crypto.randomUUID(),
+    entityType: "evidence",
+    entityId: evidence.id,
+    action: "evidence_submitted",
+    actorId: evidence.submittedBy,
+    actorRole: evidence.source,
+    description: `Evidence submitted for ${product.name} by ${evidence.source}.`,
+    createdAt: new Date().toISOString(),
+  };
+  addEvent(event);
+
   return NextResponse.json(evidence, { status: 201 });
 }

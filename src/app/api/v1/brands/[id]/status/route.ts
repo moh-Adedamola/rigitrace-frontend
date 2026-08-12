@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import type { Brand } from "@/lib/types/entities";
+import type { Brand, EventLogEntry } from "@/lib/types/entities";
 import { updateBrandStatus } from "@/lib/mock/brandStore";
+import { addEvent } from "@/lib/mock/eventLogStore";
 
 const VALID_STATUSES: Brand["status"][] = ["draft", "pending", "approved", "suspended", "revoked"];
 
@@ -24,6 +25,21 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
       { status: 404 }
     );
   }
+
+  const event: EventLogEntry = {
+    id: crypto.randomUUID(),
+    entityType: "brand",
+    entityId: updated.id,
+    action: `brand_${updated.status}`,
+    // No auth yet — nothing sends a real actorId here. Accept one if a
+    // future caller sends it; "unknown" until then, same fallback already
+    // used in products/[id]/route.ts.
+    actorId: body.actorId ?? "unknown",
+    actorRole: "admin",
+    description: `${updated.name} ${updated.status} by admin.`,
+    createdAt: new Date().toISOString(),
+  };
+  addEvent(event);
 
   return NextResponse.json(updated);
 }

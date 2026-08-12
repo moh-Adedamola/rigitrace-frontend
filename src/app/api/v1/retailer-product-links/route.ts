@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import type { RetailerProductLink } from "@/lib/types/entities";
+import type { EventLogEntry, RetailerProductLink } from "@/lib/types/entities";
 import { addLink } from "@/lib/mock/retailerProductLinkStore";
 import { findRetailer } from "@/lib/mock/retailerStore";
 import { findProduct } from "@/lib/mock/productStore";
+import { addEvent } from "@/lib/mock/eventLogStore";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -39,5 +40,18 @@ export async function POST(request: Request) {
   };
 
   addLink(link);
+
+  const event: EventLogEntry = {
+    id: crypto.randomUUID(),
+    entityType: "retailer",
+    entityId: retailer.id,
+    action: "retailer_product_link_created",
+    actorId: retailer.id,
+    actorRole: "retailer",
+    description: `${retailer.name} linked to ${product.name}.`,
+    createdAt: new Date().toISOString(),
+  };
+  addEvent(event);
+
   return NextResponse.json(link, { status: 201 });
 }
