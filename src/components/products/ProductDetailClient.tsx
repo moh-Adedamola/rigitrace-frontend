@@ -22,6 +22,8 @@ export function ProductDetailClient({ productId }: { productId: string }) {
   const [recalculating, setRecalculating] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function load() {
       setLoading(true);
       setError(null);
@@ -31,16 +33,23 @@ export function ProductDetailClient({ productId }: { productId: string }) {
           apiFetch<ListResponse<Evidence>>(`/api/v1/products/${productId}/evidence`),
           apiFetch<TrustScore>(`/api/v1/products/${productId}/trust-score`),
         ]);
+        if (cancelled) return;
         setProduct(productRes);
         setEvidence(evidenceRes.data);
         setTrustScore(trustRes);
       } catch (err) {
+        if (cancelled) return;
         setError(err instanceof Error ? err.message : "Failed to load product.");
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
+
     load();
+
+    return () => {
+      cancelled = true;
+    };
   }, [productId]);
 
   async function handleEvidenceSubmitted(newEvidence: Evidence) {

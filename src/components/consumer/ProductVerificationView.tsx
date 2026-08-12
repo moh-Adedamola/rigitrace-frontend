@@ -23,6 +23,8 @@ export function ProductVerificationView({ productId }: { productId: string }) {
   const [recalculating, setRecalculating] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function load() {
       setLoading(true);
       setError(null);
@@ -33,17 +35,24 @@ export function ProductVerificationView({ productId }: { productId: string }) {
           apiFetch<TrustScore>(`/api/v1/products/${productId}/trust-score`),
           apiFetch<ListResponse<Retailer>>(`/api/v1/products/${productId}/retailers`),
         ]);
+        if (cancelled) return;
         setProduct(productRes);
         setEvidence(evidenceRes.data);
         setTrustScore(trustRes);
         setRetailers(retailersRes.data);
       } catch (err) {
+        if (cancelled) return;
         setError(err instanceof Error ? err.message : "Failed to load product.");
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
+
     load();
+
+    return () => {
+      cancelled = true;
+    };
   }, [productId]);
 
   async function handleReportSubmitted() {
