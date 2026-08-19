@@ -1,4 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
+
+interface BusinessCaseImage {
+  src: string;
+  width: number;
+  height: number;
+}
 
 export interface BusinessCasePageContent {
   eyebrow: string;
@@ -12,6 +19,10 @@ export interface BusinessCasePageContent {
   ctaHref: string;
   ctaLabel: string;
   ctaSupportingText: string;
+  /** All three optional and decorative (alt="") — the page reads fully without them. */
+  heroImage?: BusinessCaseImage;
+  whatYouGetImage?: BusinessCaseImage;
+  howItWorksImage?: BusinessCaseImage;
 }
 
 const CTA_CLASSES =
@@ -32,6 +43,19 @@ export function BusinessCasePage({ content }: { content: BusinessCasePageContent
           <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground md:text-base">
             {content.intro}
           </p>
+          {content.heroImage && (
+            // Decorative — sits below the hero text, never behind it; adds no fact the copy doesn't already state
+            <div className="mx-auto mt-8 w-48 overflow-hidden rounded-lg border border-border sm:w-56">
+              <Image
+                src={content.heroImage.src}
+                alt=""
+                width={content.heroImage.width}
+                height={content.heroImage.height}
+                sizes="224px"
+                className="h-auto w-full"
+              />
+            </div>
+          )}
         </div>
       </section>
 
@@ -53,6 +77,19 @@ export function BusinessCasePage({ content }: { content: BusinessCasePageContent
           <h2 className="text-center font-serif text-2xl font-semibold text-foreground md:text-3xl">
             What you get
           </h2>
+          {content.whatYouGetImage && (
+            // Decorative — large set-piece visual, no information beyond the cards below
+            <div className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-lg border border-border">
+              <Image
+                src={content.whatYouGetImage.src}
+                alt=""
+                width={content.whatYouGetImage.width}
+                height={content.whatYouGetImage.height}
+                sizes="(min-width: 1024px) 896px, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
+          )}
           <div className="mt-10 grid gap-8 sm:grid-cols-2">
             {content.whatYouGet.map((item) => (
               <div key={item.title} className="rounded-lg border border-border bg-card p-6">
@@ -70,19 +107,40 @@ export function BusinessCasePage({ content }: { content: BusinessCasePageContent
           <h2 className="text-center font-serif text-2xl font-semibold text-foreground md:text-3xl">
             How it works
           </h2>
-          <ol className="mx-auto mt-10 max-w-2xl space-y-6">
-            {content.howItWorks.map((step, index) => (
-              <li key={step.title} className="flex gap-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
-                  {index + 1}
-                </span>
-                <div>
-                  <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{step.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <div
+            className={
+              content.howItWorksImage
+                ? "mx-auto mt-10 grid max-w-4xl gap-8 md:grid-cols-[1fr_1.1fr] md:items-center"
+                : "mx-auto mt-10 max-w-2xl"
+            }
+          >
+            <ol className="space-y-6">
+              {content.howItWorks.map((step, index) => (
+                <li key={step.title} className="flex gap-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            {content.howItWorksImage && (
+              // Decorative — the numbered steps already say what happens at each stage
+              <div className="overflow-hidden rounded-lg border border-border">
+                <Image
+                  src={content.howItWorksImage.src}
+                  alt=""
+                  width={content.howItWorksImage.width}
+                  height={content.howItWorksImage.height}
+                  sizes="(min-width: 768px) 40vw, 100vw"
+                  className="h-auto w-full"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </section>
 

@@ -2,71 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProductSearch } from "@/components/consumer/ProductSearch";
 import { TrustBadge } from "@/components/trust/TrustBadge";
-import type { TrustScore } from "@/lib/types/entities";
-
-// Illustrative only — not a real product record. Copy matches the trust
-// explanation pattern in docs/ui-context.md Part 2 verbatim.
-const SAMPLE_TRUST_SCORE: TrustScore = {
-  id: "sample",
-  productId: "sample",
-  score: 82,
-  status: "high",
-  explanation:
-    "Aduke Naturals is an approved brand, and four pieces of evidence from three independent sources support this product. No unresolved reports.",
-  factors: [
-    {
-      label: "Brand verification",
-      impact: "positive",
-      weight: 40,
-      detail: "Aduke Naturals is an approved brand on RigiTrace",
-    },
-    {
-      label: "Evidence volume and source diversity",
-      impact: "positive",
-      weight: 30,
-      detail: "Four pieces of evidence from three independent sources",
-    },
-  ],
-  calculatedAt: "2026-08-01T09:00:00Z",
-};
-
-const HOW_IT_WORKS_STEPS = [
-  {
-    icon: SearchIcon,
-    title: "Search",
-    body: "Type a product name or scan its barcode.",
-  },
-  {
-    icon: EvidenceIcon,
-    title: "See the evidence",
-    body: "View what the brand, retailers, and others have submitted on record.",
-  },
-  {
-    icon: ShieldIcon,
-    title: "See the trust status",
-    body: "Read the score and the reasons behind it — never just a number.",
-  },
-  {
-    icon: FlagIcon,
-    title: "Report if something's wrong",
-    body: "Flag a suspicious product in a few taps, no account needed.",
-  },
-];
-
-const TRANSPARENCY_RULES = [
-  {
-    title: "Consumers never pay",
-    body: "Verifying a product is free, and it stays free.",
-  },
-  {
-    title: "Scores can't be bought",
-    body: "Brand status, payment, and subscription tier never influence a trust score — only evidence and reports do.",
-  },
-  {
-    title: "Evidence is never deleted",
-    body: "Corrections are added as new records. The original stays on view.",
-  },
-];
+import {
+  HOW_IT_WORKS_STEPS,
+  SAMPLE_TRUST_SCORE,
+  TRANSPARENCY_RULES,
+} from "@/components/marketing/sharedContent";
 
 export default function MarketingHomePage() {
   return (
@@ -133,11 +73,24 @@ export default function MarketingHomePage() {
             RigiTrace never shows a bare score. Every trust status is paired with the
             evidence and factors behind it — here&apos;s an example.
           </p>
-          <div className="mt-8 text-left">
-            <TrustBadge trustScore={SAMPLE_TRUST_SCORE} />
-            <p className="mt-2 text-xs text-muted-foreground">
-              Example only — not a real product on RigiTrace.
-            </p>
+          <div className="mt-8 flex flex-col items-center gap-6 text-left md:flex-row md:items-start md:justify-center">
+            <div>
+              <TrustBadge trustScore={SAMPLE_TRUST_SCORE} />
+              <p className="mt-2 text-xs text-muted-foreground">
+                Example only — not a real product on RigiTrace.
+              </p>
+            </div>
+            {/* Decorative — small supporting element, not a second source of information */}
+            <div className="w-32 shrink-0 overflow-hidden rounded-lg border border-border sm:w-40">
+              <Image
+                src="/images/marketing/home-trust-drop.webp"
+                alt=""
+                width={800}
+                height={1200}
+                sizes="160px"
+                className="h-auto w-full"
+              />
+            </div>
           </div>
           <Link
             href="/trust"
@@ -222,6 +175,23 @@ export default function MarketingHomePage() {
         </div>
       </section>
 
+      {/* Banner — visual pause between the business cards and the closing rules */}
+      <section className="pb-6 md:pb-8">
+        <div className="mx-auto max-w-6xl px-4">
+          {/* Decorative — a considered visual break, no information of its own */}
+          <div className="overflow-hidden rounded-lg border border-border">
+            <Image
+              src="/images/marketing/home-banner-bottles.webp"
+              alt=""
+              width={1200}
+              height={800}
+              sizes="(min-width: 1024px) 1024px, 100vw"
+              className="h-auto w-full"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Trust and transparency */}
       <section className="section-y bg-section-raised">
         <div className="mx-auto max-w-6xl px-4">
@@ -259,82 +229,6 @@ function ChevronDownIcon() {
       aria-hidden="true"
     >
       <path d="M5 8l5 5 5-5" />
-    </svg>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <circle cx="9" cy="9" r="6" />
-      <path d="M17 17l-3.5-3.5" />
-    </svg>
-  );
-}
-
-function EvidenceIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 3h7l3 3v11a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z" />
-      <path d="M7 9h6M7 12h6M7 15h3" />
-    </svg>
-  );
-}
-
-function ShieldIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M10 2l7 3v5c0 4.5-3 7-7 8-4-1-7-3.5-7-8V5l7-3z" />
-      <path d="M7 10l2 2 4-4" />
-    </svg>
-  );
-}
-
-function FlagIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 17V3" />
-      <path d="M5 4h9l-2 3 2 3H5" />
     </svg>
   );
 }

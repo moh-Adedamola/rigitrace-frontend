@@ -88,6 +88,17 @@ export default function HowItWorksPage() {
               directly to RigiTrace — direct file upload is planned, not built yet.
             </p>
           </div>
+          {/* Decorative — larger set piece; the four sources are already named in the text above */}
+          <div className="mx-auto mt-8 max-w-sm overflow-hidden rounded-lg border border-border">
+            <Image
+              src="/images/marketing/how-it-works-evidence.webp"
+              alt=""
+              width={800}
+              height={1200}
+              sizes="(min-width: 640px) 384px, 100vw"
+              className="h-auto w-full"
+            />
+          </div>
         </div>
       </section>
 
@@ -167,15 +178,28 @@ export default function HowItWorksPage() {
               and the option to report something that looks wrong.
             </p>
           </div>
-          <div className="mt-6 rounded-lg border-l-4 border-primary bg-card p-6">
-            <p className="text-xs font-semibold uppercase tracking-wide text-eyebrow">
-              Worth knowing
-            </p>
-            <p className="mt-2 text-sm text-foreground">
-              Nothing about searching is tracked. No account is created, and no analytics or
-              advertising script watches what you look up. You come, you check, you leave —
-              that&apos;s the whole interaction.
-            </p>
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-stretch">
+            <div className="flex-1 rounded-lg border-l-4 border-primary bg-card p-6">
+              <p className="text-xs font-semibold uppercase tracking-wide text-eyebrow">
+                Worth knowing
+              </p>
+              <p className="mt-2 text-sm text-foreground">
+                Nothing about searching is tracked. No account is created, and no analytics or
+                advertising script watches what you look up. You come, you check, you leave —
+                that&apos;s the whole interaction.
+              </p>
+            </div>
+            {/* Decorative — small supporting element beside the callout */}
+            <div className="w-full shrink-0 overflow-hidden rounded-lg border border-border sm:w-32">
+              <Image
+                src="/images/marketing/how-it-works-verification.webp"
+                alt=""
+                width={801}
+                height={1200}
+                sizes="128px"
+                className="h-auto w-full sm:h-full sm:object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

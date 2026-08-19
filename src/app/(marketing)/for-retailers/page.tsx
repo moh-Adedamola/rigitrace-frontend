@@ -69,6 +69,21 @@ const CONTENT: BusinessCasePageContent = {
   ctaLabel: "Join the pilot",
   ctaSupportingText:
     "There's no self-serve signup — tell us about your store, or email rigitrace@gmail.com directly.",
+  heroImage: {
+    src: "/images/marketing/for-retailers-hero-bottle.webp",
+    width: 800,
+    height: 1200,
+  },
+  whatYouGetImage: {
+    src: "/images/marketing/for-retailers-whatyouget-set.webp",
+    width: 800,
+    height: 1200,
+  },
+  howItWorksImage: {
+    src: "/images/marketing/for-retailers-howitworks-bottle.webp",
+    width: 1200,
+    height: 800,
+  },
 };
 
 export default function ForRetailersPage() {

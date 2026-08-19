@@ -20,23 +20,36 @@ export default function AboutPage() {
 
       {/* The problem */}
       <section className="section-y bg-section-raised">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <h2 className="font-serif text-2xl font-semibold text-foreground md:text-3xl">
             The problem
           </h2>
-          <div className="mt-6 space-y-4 text-sm text-muted-foreground md:text-base">
-            <p>
-              Right now, product trust is fragmented. A shopper standing in front of a shelf has
-              no way to check what they&apos;re buying before they pay. A legitimate brand has
-              no way to prove that a fake carrying its name isn&apos;t theirs. A retailer
-              stocking genuine goods has no way to show that. A regulator trying to understand
-              what&apos;s actually circulating has no visibility into any of it.
-            </p>
-            <p>
-              Each of those groups holds one piece of the picture, and none of them are connected
-              to each other. RigiTrace exists to connect them through one shared product record,
-              instead of four separate, disconnected guesses.
-            </p>
+          <div className="mt-6 grid gap-8 md:grid-cols-[1.3fr_1fr] md:items-start">
+            <div className="space-y-4 text-sm text-muted-foreground md:text-base">
+              <p>
+                Right now, product trust is fragmented. A shopper standing in front of a shelf has
+                no way to check what they&apos;re buying before they pay. A legitimate brand has
+                no way to prove that a fake carrying its name isn&apos;t theirs. A retailer
+                stocking genuine goods has no way to show that. A regulator trying to understand
+                what&apos;s actually circulating has no visibility into any of it.
+              </p>
+              <p>
+                Each of those groups holds one piece of the picture, and none of them are connected
+                to each other. RigiTrace exists to connect them through one shared product record,
+                instead of four separate, disconnected guesses.
+              </p>
+            </div>
+            {/* Decorative — the two paragraphs already state the problem */}
+            <div className="overflow-hidden rounded-lg border border-border">
+              <Image
+                src="/images/marketing/about-problem.webp"
+                alt=""
+                width={1200}
+                height={1200}
+                sizes="(min-width: 768px) 35vw, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -47,30 +60,43 @@ export default function AboutPage() {
           <h2 className="font-serif text-2xl font-semibold text-foreground md:text-3xl">
             What we&apos;re building — and what we&apos;re not
           </h2>
-          <div className="mt-6 space-y-4 text-sm text-muted-foreground md:text-base">
-            <p>
-              RigiTrace is a platform, not a single app: a product identity system that a public
-              verification search sits on top of today, with a brand portal, a retailer portal,
-              and an admin console being built on the same record underneath it.
-            </p>
-            <p>
-              A physical product becomes one digital record: who made it, what proof supports it,
-              a trust score that explains itself, and a history of what&apos;s happened to it.
-              That&apos;s the record a shopper checks, a brand builds, and — eventually — a
-              regulator can see into.
-            </p>
-            <p>
-              What it deliberately isn&apos;t: not AI-based verification, not blockchain or NFT
-              identities, not supply-chain or batch tracking, not a marketplace, not a social
-              network. Blockchain and NFTs in particular aren&apos;t on a someday list — we
-              looked at them and decided they don&apos;t strengthen the actual job, which is
-              evidence and proof, not a ledger.
-            </p>
-            <p>
-              A mobile app, a public API, and deeper integrations are on the roadmap once the web
-              platform&apos;s foundations are solid. They&apos;re planned, not built — we&apos;re
-              not describing them as if they already exist.
-            </p>
+          <div className="mt-6 flex flex-col gap-6 sm:flex-row">
+            <div className="flex-1 space-y-4 text-sm text-muted-foreground md:text-base">
+              <p>
+                RigiTrace is a platform, not a single app: a product identity system that a public
+                verification search sits on top of today, with a brand portal, a retailer portal,
+                and an admin console being built on the same record underneath it.
+              </p>
+              <p>
+                A physical product becomes one digital record: who made it, what proof supports it,
+                a trust score that explains itself, and a history of what&apos;s happened to it.
+                That&apos;s the record a shopper checks, a brand builds, and — eventually — a
+                regulator can see into.
+              </p>
+              <p>
+                What it deliberately isn&apos;t: not AI-based verification, not blockchain or NFT
+                identities, not supply-chain or batch tracking, not a marketplace, not a social
+                network. Blockchain and NFTs in particular aren&apos;t on a someday list — we
+                looked at them and decided they don&apos;t strengthen the actual job, which is
+                evidence and proof, not a ledger.
+              </p>
+              <p>
+                A mobile app, a public API, and deeper integrations are on the roadmap once the web
+                platform&apos;s foundations are solid. They&apos;re planned, not built — we&apos;re
+                not describing them as if they already exist.
+              </p>
+            </div>
+            {/* Decorative — small supporting element, not a second source of information */}
+            <div className="w-full shrink-0 overflow-hidden rounded-lg border border-border sm:w-36">
+              <Image
+                src="/images/marketing/about-building.webp"
+                alt=""
+                width={901}
+                height={1200}
+                sizes="144px"
+                className="h-auto w-full"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -164,16 +190,29 @@ export default function AboutPage() {
           <h2 className="font-serif text-2xl font-semibold text-foreground md:text-3xl">
             Where it goes from here
           </h2>
-          <div className="mt-6 space-y-4 text-sm text-muted-foreground md:text-base">
-            <p>
-              We&apos;re currently working with a small group of founding brands and retailers by
-              hand, before RigiTrace opens up more broadly.
-            </p>
-            <p>
-              After the pilot, the plan is a public beta with more brands and retailers, then a
-              wider launch — each stage adding capability once the one before it is solid, not
-              before.
-            </p>
+          <div className="mt-6 flex flex-col gap-6 sm:flex-row">
+            <div className="flex-1 space-y-4 text-sm text-muted-foreground md:text-base">
+              <p>
+                We&apos;re currently working with a small group of founding brands and retailers by
+                hand, before RigiTrace opens up more broadly.
+              </p>
+              <p>
+                After the pilot, the plan is a public beta with more brands and retailers, then a
+                wider launch — each stage adding capability once the one before it is solid, not
+                before.
+              </p>
+            </div>
+            {/* Decorative — small closing visual, not a second source of information */}
+            <div className="w-full shrink-0 overflow-hidden rounded-lg border border-border sm:w-36">
+              <Image
+                src="/images/marketing/about-where-it-goes.webp"
+                alt=""
+                width={786}
+                height={1200}
+                sizes="144px"
+                className="h-auto w-full"
+              />
+            </div>
           </div>
         </div>
       </section>
