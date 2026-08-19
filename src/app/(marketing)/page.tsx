@@ -22,7 +22,7 @@ export default function MarketingHomePage() {
             much confidence that evidence supports. Free, and no account needed.
           </p>
           <div className="mt-8">
-            <ProductSearch />
+            <ProductSearch size="hero" />
           </div>
           <a
             href="#how-it-works"

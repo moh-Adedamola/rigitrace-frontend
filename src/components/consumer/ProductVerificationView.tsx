@@ -77,61 +77,74 @@ export function ProductVerificationView({ productId }: { productId: string }) {
   if (!product) return <p className="text-sm text-muted-foreground">Product not found.</p>;
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+    <div className="space-y-8 sm:space-y-10">
+      {/* Identity — compact on purpose. It sets context; it isn't the answer. */}
+      <div className="flex items-center gap-3">
         <ProductImage
           images={product.images}
           category={product.category}
           name={product.name}
-          className="h-24 w-24 shrink-0 sm:h-32 sm:w-32"
+          className="h-14 w-14 shrink-0 sm:h-16 sm:w-16"
         />
         <div className="min-w-0">
-          <div className="mb-1 flex items-center gap-2">
-            <h1 className="text-2xl font-semibold text-foreground">{product.name}</h1>
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-lg font-semibold text-foreground sm:text-xl">{product.name}</h1>
             <StatusPill status={product.status} />
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="mt-0.5 text-xs text-muted-foreground">
             {product.category}
-            {product.barcode ? ` · Barcode: ${product.barcode}` : ""}
+            {product.barcode && (
+              <>
+                {" · Barcode: "}
+                <span className="font-mono">{product.barcode}</span>
+              </>
+            )}
           </p>
         </div>
       </div>
 
+      {/* Trust status — the centre of the page. Everything below supports this. */}
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-eyebrow">
+        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-eyebrow">
           Trust status {recalculating && "(recalculating…)"}
         </h2>
-        {trustScore && <TrustBadge trustScore={trustScore} />}
+        {trustScore && <TrustBadge trustScore={trustScore} size="large" />}
       </section>
 
-      <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-eyebrow">
-          Available at
-        </h2>
-        {retailers.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No verified retailers linked yet.</p>
-        ) : (
-          <ul className="space-y-2">
-            {retailers.map((r) => (
-              <li
-                key={r.id}
-                className="rounded-lg border border-border bg-card p-3 text-sm text-foreground"
-              >
-                <span className="font-medium">{r.name}</span>
-                <span className="ml-2 text-muted-foreground">{r.type.replace("_", " ")}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      {/* Supporting detail — one tier down visually: muted headings, a
+          shared panel background, grouped together rather than each
+          reading as its own equally-weighted section. */}
+      <div className="space-y-6 rounded-lg border border-border bg-section-raised p-4 sm:p-6">
+        <section>
+          <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Available at
+          </h2>
+          {retailers.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No verified retailers linked yet.</p>
+          ) : (
+            <ul className="flex flex-wrap gap-2">
+              {retailers.map((r) => (
+                <li
+                  key={r.id}
+                  className="rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground"
+                >
+                  <span className="font-medium">{r.name}</span>
+                  <span className="ml-1.5 text-muted-foreground">{r.type.replace("_", " ")}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
 
-      <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-eyebrow">
-          Evidence on record
-        </h2>
-        <EvidenceTimeline evidence={evidence} />
-      </section>
+        <section className="border-t border-border pt-6">
+          <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Evidence on record
+          </h2>
+          <EvidenceTimeline evidence={evidence} />
+        </section>
+      </div>
 
+      {/* Report — a low-key exit, not competing for attention. */}
       <section>
         <ReportForm productId={productId} onSubmitted={handleReportSubmitted} />
       </section>

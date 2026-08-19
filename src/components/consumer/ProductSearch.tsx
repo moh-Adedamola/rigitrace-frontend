@@ -51,7 +51,17 @@ async function enrichResults(products: Product[]): Promise<SearchResultItem[]> {
   }
 }
 
-export function ProductSearch() {
+interface ProductSearchProps {
+  /**
+   * "hero" is the homepage treatment — a bigger field and button, since
+   * this is the first thing a visitor meets and the whole promise of the
+   * product. Omit this prop (or pass "default") and the output is exactly
+   * what it always was, so /verify's own search is untouched by this.
+   */
+  size?: "default" | "hero";
+}
+
+export function ProductSearch({ size = "default" }: ProductSearchProps) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [searching, setSearching] = useState(false);
@@ -82,15 +92,22 @@ export function ProductSearch() {
     }
   }
 
+  const isHero = size === "hero";
+
   return (
     <div className="mx-auto max-w-xl">
-      <form onSubmit={handleSearch} className="flex gap-2">
+      <form onSubmit={handleSearch} className={isHero ? "flex gap-3" : "flex gap-2"}>
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Product name or barcode…"
+          className={isHero ? "h-12 text-base sm:h-14 sm:text-lg" : undefined}
         />
-        <Button type="submit" disabled={searching}>
+        <Button
+          type="submit"
+          disabled={searching}
+          className={isHero ? "h-12 shrink-0 px-6 text-base sm:h-14 sm:px-8 sm:text-lg" : undefined}
+        >
           {searching ? "Searching…" : "Verify"}
         </Button>
       </form>
