@@ -49,7 +49,7 @@ export function ReportForm({ productId, onSubmitted }: Props) {
 
   if (submitted) {
     return (
-      <div className="rounded-lg border border-border bg-card p-4">
+      <div className="rounded-lg border-l-4 border-border bg-muted p-4">
         <p className="text-sm text-foreground">
           Thank you — your report is recorded. Review isn&apos;t built yet, so nothing acts
           on it automatically.

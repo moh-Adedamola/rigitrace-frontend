@@ -256,7 +256,7 @@ export default function TrustPage() {
               No barcode, no photos — an incomplete product record scores lower than a
               complete one, even for a fully verified brand.
             </li>
-            <li>
+            <li className="rounded-lg border-l-4 border-border bg-muted p-4">
               <span className="font-medium text-foreground">Reports, once reviewed.</span>{" "}
               Filing a report never moves a score by itself — it&apos;s recorded against
               the product, nothing more. Reporting requires no account, so counting every
@@ -327,7 +327,7 @@ export default function TrustPage() {
               certificate and a retailer&apos;s confirmation count for more, together,
               than either alone.
             </li>
-            <li>
+            <li className="rounded-lg border-l-4 border-border bg-muted p-4">
               <span className="font-medium text-foreground">4. Reports aren&apos;t worth
                 acting on for your score yet</span>{" "}
               — reviewing reports so they can count isn&apos;t built, so right now, filed

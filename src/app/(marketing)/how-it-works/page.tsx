@@ -83,6 +83,8 @@ export default function HowItWorksPage() {
               is added as a new entry that points back at the one it replaces — the original
               stays visible. Nothing quietly disappears from a product&apos;s record.
             </p>
+          </div>
+          <div className="mt-4 rounded-lg border-l-4 border-border bg-muted p-4 text-sm text-muted-foreground md:text-base">
             <p>
               Right now, supporting documents are referenced by link rather than uploaded
               directly to RigiTrace — direct file upload is planned, not built yet.
@@ -221,6 +223,8 @@ export default function HowItWorksPage() {
               automatically would make it trivial to file reports against a competitor and drag
               their score down instead.
             </p>
+          </div>
+          <div className="mt-4 space-y-3 rounded-lg border-l-4 border-border bg-muted p-4 text-sm text-muted-foreground md:text-base">
             <p>
               The scoring system only counts a report once it&apos;s been reviewed and
               confirmed — but reviewing reports isn&apos;t built yet, so as things stand, no
