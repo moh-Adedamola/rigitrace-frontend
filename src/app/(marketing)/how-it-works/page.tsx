@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { MarketingHero } from "@/components/marketing/MarketingHero";
 import { ProductSearch } from "@/components/consumer/ProductSearch";
@@ -20,28 +21,41 @@ export default function HowItWorksPage() {
 
       {/* 1. Identity */}
       <section className="section-y bg-section-raised">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <h2 className="font-serif text-2xl font-semibold text-foreground md:text-3xl">
             A product&apos;s identity
           </h2>
-          <div className="mt-6 space-y-4 text-sm text-muted-foreground md:text-base">
-            <p>
-              A brand registers on RigiTrace with its business details, and every brand is
-              reviewed before it can publish anything. An unreviewed brand can&apos;t put a
-              product on the platform.
-            </p>
-            <p>
-              Once approved, the brand registers each product — a name, a category, and, where
-              one exists, a barcode. That record is the product&apos;s identity: a single,
-              permanent anchor that everything else — evidence, trust status, reports — attaches
-              to.
-            </p>
-            <p>
-              A product stays in draft while the brand is still filling it in, and only becomes
-              publicly searchable once the brand publishes it. A jar of body cream gets
-              registered by its brand before anyone can look it up — identity comes first,
-              before any proof is attached.
-            </p>
+          <div className="mt-6 grid gap-8 md:grid-cols-[1.3fr_1fr] md:items-start">
+            <div className="space-y-4 text-sm text-muted-foreground md:text-base">
+              <p>
+                A brand registers on RigiTrace with its business details, and every brand is
+                reviewed before it can publish anything. An unreviewed brand can&apos;t put a
+                product on the platform.
+              </p>
+              <p>
+                Once approved, the brand registers each product — a name, a category, and, where
+                one exists, a barcode. That record is the product&apos;s identity: a single,
+                permanent anchor that everything else — evidence, trust status, reports — attaches
+                to.
+              </p>
+              <p>
+                A product stays in draft while the brand is still filling it in, and only becomes
+                publicly searchable once the brand publishes it. A jar of body cream gets
+                registered by its brand before anyone can look it up — identity comes first,
+                before any proof is attached.
+              </p>
+            </div>
+            {/* Decorative — illustrates the section, adds no fact beyond the text */}
+            <div className="overflow-hidden rounded-lg border border-border">
+              <Image
+                src="/images/marketing/how-it-works-identity.webp"
+                alt=""
+                width={1200}
+                height={800}
+                sizes="(min-width: 768px) 35vw, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
           </div>
         </div>
       </section>

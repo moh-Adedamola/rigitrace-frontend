@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { MarketingHero } from "@/components/marketing/MarketingHero";
 import { MarketingCTA } from "@/components/marketing/MarketingCTA";
 
@@ -118,28 +119,41 @@ export default function AboutPage() {
 
       {/* Why beauty, Nigeria, first */}
       <section className="section-y">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <h2 className="font-serif text-2xl font-semibold text-foreground md:text-3xl">
             Why beauty, why Nigeria, first
           </h2>
-          <div className="mt-6 space-y-4 text-sm text-muted-foreground md:text-base">
-            <p>
-              We started with beauty in Nigeria because the conditions make the problem sharp and
-              solvable at once: counterfeit risk in the category is high, packaging carries
-              strong visual identity that&apos;s easy to compare, people buy often rather than
-              rarely, buying decisions increasingly happen on social media, and thousands of
-              small independent brands are entering the market with no way to prove who they are.
-            </p>
-            <p>
-              Trust already decides most beauty purchases. RigiTrace makes that trust checkable
-              instead of assumed.
-            </p>
-            <p>
-              The system underneath isn&apos;t built specifically for beauty or specifically for
-              Nigeria. Category and country are both just data — nothing in the identity,
-              evidence, or trust model is hardcoded to either, so extending to other product
-              categories and other markets doesn&apos;t mean rebuilding the foundations.
-            </p>
+          <div className="mt-6 grid gap-8 md:grid-cols-[1.3fr_1fr] md:items-start">
+            <div className="space-y-4 text-sm text-muted-foreground md:text-base">
+              <p>
+                We started with beauty in Nigeria because the conditions make the problem sharp and
+                solvable at once: counterfeit risk in the category is high, packaging carries
+                strong visual identity that&apos;s easy to compare, people buy often rather than
+                rarely, buying decisions increasingly happen on social media, and thousands of
+                small independent brands are entering the market with no way to prove who they are.
+              </p>
+              <p>
+                Trust already decides most beauty purchases. RigiTrace makes that trust checkable
+                instead of assumed.
+              </p>
+              <p>
+                The system underneath isn&apos;t built specifically for beauty or specifically for
+                Nigeria. Category and country are both just data — nothing in the identity,
+                evidence, or trust model is hardcoded to either, so extending to other product
+                categories and other markets doesn&apos;t mean rebuilding the foundations.
+              </p>
+            </div>
+            {/* Decorative — illustrates the section, adds no fact beyond the text */}
+            <div className="overflow-hidden rounded-lg border border-border">
+              <Image
+                src="/images/marketing/about-why-nigeria.webp"
+                alt=""
+                width={800}
+                height={1200}
+                sizes="(min-width: 768px) 35vw, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
           </div>
         </div>
       </section>

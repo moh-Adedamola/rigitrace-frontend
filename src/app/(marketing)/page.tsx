@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ProductSearch } from "@/components/consumer/ProductSearch";
 import { TrustBadge } from "@/components/trust/TrustBadge";
@@ -149,20 +150,35 @@ export default function MarketingHomePage() {
 
       {/* Why it matters */}
       <section className="section-y bg-section-raised">
-        <div className="mx-auto max-w-3xl px-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-wide text-eyebrow">
-            Why it matters
-          </p>
-          <h2 className="mx-auto mt-2 max-w-xl font-serif text-2xl font-semibold text-foreground md:text-3xl">
-            Right now, checking a product means guessing.
-          </h2>
-          <p className="mt-4 text-sm text-muted-foreground md:text-base">
-            Counterfeit and mislabelled beauty products circulate in open markets and
-            online, and a shopper standing in front of a shelf has no simple way to
-            tell what&apos;s genuine before they pay. Brands lose sales and reputation
-            to products they didn&apos;t make. RigiTrace gives everyone in that chain —
-            brand, retailer, and buyer — the same record to check against.
-          </p>
+        <div className="mx-auto max-w-4xl px-4">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-wide text-eyebrow">
+              Why it matters
+            </p>
+            <h2 className="mx-auto mt-2 max-w-xl font-serif text-2xl font-semibold text-foreground md:text-3xl">
+              Right now, checking a product means guessing.
+            </h2>
+          </div>
+          <div className="mt-8 grid items-center gap-8 md:grid-cols-2">
+            <p className="text-sm text-muted-foreground md:text-base">
+              Counterfeit and mislabelled beauty products circulate in open markets and
+              online, and a shopper standing in front of a shelf has no simple way to
+              tell what&apos;s genuine before they pay. Brands lose sales and reputation
+              to products they didn&apos;t make. RigiTrace gives everyone in that chain —
+              brand, retailer, and buyer — the same record to check against.
+            </p>
+            {/* Decorative — the paragraph carries the point; a screen reader gains nothing from this image */}
+            <div className="overflow-hidden rounded-lg border border-border">
+              <Image
+                src="/images/marketing/home-why-it-matters.webp"
+                alt=""
+                width={801}
+                height={1200}
+                sizes="(min-width: 768px) 45vw, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
