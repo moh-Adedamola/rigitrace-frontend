@@ -1,6 +1,9 @@
 import type { TrustScore } from "@/lib/types/entities";
 
-const STATUS_STYLES: Record<TrustScore["status"], { bg: string; text: string; label: string }> = {
+/** Exported so TrustScoreHistory can use the exact same colour/label
+ * mapping — one source of truth for "what does each status tier look
+ * like," not a second copy that could drift. */
+export const STATUS_STYLES: Record<TrustScore["status"], { bg: string; text: string; label: string }> = {
   high: { bg: "bg-trust-high/10", text: "text-trust-high", label: "Verified" },
   medium: { bg: "bg-trust-medium/10", text: "text-trust-medium", label: "Partially verified" },
   low: { bg: "bg-trust-low/10", text: "text-trust-low", label: "Low confidence" },

@@ -4,13 +4,20 @@ import { useEffect, useState } from "react";
 import { StatusPill } from "@/components/status/StatusPill";
 import { TrustBadge } from "@/components/trust/TrustBadge";
 import { EvidenceTimeline } from "@/components/evidence/EvidenceTimeline";
+import { TrustScoreHistory } from "@/components/trust/TrustScoreHistory";
 import { ReportForm } from "@/components/forms/ReportForm";
 import { ProductImage } from "@/components/product/ProductImage";
 import { apiFetch } from "@/lib/api/client";
 import type { Product, Evidence, TrustScore, Retailer } from "@/lib/types/entities";
+import type { TrustScoreHistoryPoint } from "@/lib/trust/reconstructTrustScoreAt";
 
 interface ListResponse<T> {
   data: T[];
+}
+
+interface TrustScoreHistoryResponse {
+  productId: string;
+  points: TrustScoreHistoryPoint[];
 }
 
 export function ProductVerificationView({ productId }: { productId: string }) {
@@ -18,6 +25,7 @@ export function ProductVerificationView({ productId }: { productId: string }) {
   const [evidence, setEvidence] = useState<Evidence[]>([]);
   const [trustScore, setTrustScore] = useState<TrustScore | null>(null);
   const [retailers, setRetailers] = useState<Retailer[]>([]);
+  const [historyPoints, setHistoryPoints] = useState<TrustScoreHistoryPoint[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [recalculating, setRecalculating] = useState(false);
@@ -29,17 +37,19 @@ export function ProductVerificationView({ productId }: { productId: string }) {
       setLoading(true);
       setError(null);
       try {
-        const [productRes, evidenceRes, trustRes, retailersRes] = await Promise.all([
+        const [productRes, evidenceRes, trustRes, retailersRes, historyRes] = await Promise.all([
           apiFetch<Product>(`/api/v1/products/${productId}`),
           apiFetch<ListResponse<Evidence>>(`/api/v1/products/${productId}/evidence`),
           apiFetch<TrustScore>(`/api/v1/products/${productId}/trust-score`),
           apiFetch<ListResponse<Retailer>>(`/api/v1/products/${productId}/retailers`),
+          apiFetch<TrustScoreHistoryResponse>(`/api/v1/products/${productId}/trust-score/history`),
         ]);
         if (cancelled) return;
         setProduct(productRes);
         setEvidence(evidenceRes.data);
         setTrustScore(trustRes);
         setRetailers(retailersRes.data);
+        setHistoryPoints(historyRes.points);
       } catch (err) {
         if (cancelled) return;
         setError(err instanceof Error ? err.message : "Failed to load product.");
@@ -141,6 +151,13 @@ export function ProductVerificationView({ productId }: { productId: string }) {
             Evidence on record
           </h2>
           <EvidenceTimeline evidence={evidence} />
+        </section>
+
+        <section className="border-t border-border pt-6">
+          <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Trust history
+          </h2>
+          <TrustScoreHistory points={historyPoints} />
         </section>
       </div>
 
