@@ -1041,7 +1041,8 @@ export const SEED_EVIDENCE: Evidence[] = [
     createdAt: "2026-06-03T16:00:00Z",
   },
 
-  // Aduke Naturals — Coconut Hydration Serum: 1 piece, brand-only.
+  // Aduke Naturals — Coconut Hydration Serum: 2 pieces, both brand — a
+  // follow-up certificate about five weeks after registration.
   {
     id: "ae3efae6-d382-43c8-b9b8-e6020d652e58",
     productId: productAdukeCoconutSerum.id,
@@ -1049,6 +1050,14 @@ export const SEED_EVIDENCE: Evidence[] = [
     submittedBy: ACTOR.brandRep,
     description: "Product registration and ingredient declaration, NAFDAC reg. no. A7-8861.",
     createdAt: "2026-05-25T09:15:00Z",
+  },
+  {
+    id: "fc80f750-fdf5-49bb-bcad-f6e9ba4201b8",
+    productId: productAdukeCoconutSerum.id,
+    source: "brand",
+    submittedBy: ACTOR.brandRep,
+    description: "Updated certificate of analysis after a stability re-test of the current formula.",
+    createdAt: "2026-07-02T09:15:00Z",
   },
 
   // Aduke Naturals — Turmeric Glow Mask: 3 pieces, 3 sources.
@@ -1160,7 +1169,8 @@ export const SEED_EVIDENCE: Evidence[] = [
     createdAt: "2026-07-13T09:15:00Z",
   },
 
-  // Aduke Naturals — Oatmeal Soap Bar: 1 piece, brand-only.
+  // Aduke Naturals — Oatmeal Soap Bar: 2 pieces, 2 sources — a consumer
+  // photo arrives about three weeks after registration.
   {
     id: "c1586d3f-5fbb-4847-956e-dc7b4663dd23",
     productId: productAdukeOatmealSoapBar.id,
@@ -1168,6 +1178,14 @@ export const SEED_EVIDENCE: Evidence[] = [
     submittedBy: ACTOR.brandRep,
     description: "Product registration and ingredient declaration, NAFDAC reg. no. A7-8915.",
     createdAt: "2026-07-20T09:15:00Z",
+  },
+  {
+    id: "2c7a38d4-f754-4028-9e66-ae061511757f",
+    productId: productAdukeOatmealSoapBar.id,
+    source: "consumer",
+    submittedBy: ACTOR.consumer,
+    description: "Consumer submitted packaging photos matching the official listing after a verified purchase.",
+    createdAt: "2026-08-11T15:00:00Z",
   },
 
   // Aduke Naturals — Green Tea Eye Cream: 2 pieces, 1 source (brand twice).
@@ -1228,7 +1246,8 @@ export const SEED_EVIDENCE: Evidence[] = [
     createdAt: "2026-06-05T14:00:00Z",
   },
 
-  // Zuri Skin Rituals — Rose Glow Toner: 1 piece, brand-only.
+  // Zuri Skin Rituals — Rose Glow Toner: 2 pieces, 2 sources — a retailer
+  // confirmation about four weeks after registration.
   {
     id: "c20cdef8-f521-4e36-8598-548bb9ea17db",
     productId: productZuriRoseGlowToner.id,
@@ -1236,6 +1255,14 @@ export const SEED_EVIDENCE: Evidence[] = [
     submittedBy: ACTOR.brandRep,
     description: "Product registration and ingredient declaration, NAFDAC reg. no. Z2-1163.",
     createdAt: "2026-05-29T10:15:00Z",
+  },
+  {
+    id: "044139bd-ba19-4c4f-9449-6aada9a4d61a",
+    productId: productZuriRoseGlowToner.id,
+    source: "retailer",
+    submittedBy: ACTOR.retailerStaff,
+    description: "Retailer confirms consistent stock sourced directly from Zuri Skin Rituals since launch.",
+    createdAt: "2026-06-26T14:00:00Z",
   },
 
   // Zuri Skin Rituals — Retinol Night Repair Serum: 2 pieces, 2 sources.
@@ -1321,7 +1348,8 @@ export const SEED_EVIDENCE: Evidence[] = [
     createdAt: "2026-06-08T11:00:00Z",
   },
 
-  // Osaze Grooming Co. — Charcoal Shampoo Bar: 1 piece, brand-only.
+  // Osaze Grooming Co. — Charcoal Shampoo Bar: 2 pieces, both brand — a
+  // follow-up certificate about six weeks after registration.
   {
     id: "b9663237-daa5-430b-a70c-0ccd91134484",
     productId: productOsazeCharcoalShampooBar.id,
@@ -1329,6 +1357,14 @@ export const SEED_EVIDENCE: Evidence[] = [
     submittedBy: ACTOR.brandRep,
     description: "Product registration and ingredient declaration, NAFDAC reg. no. O5-2248.",
     createdAt: "2026-05-27T11:15:00Z",
+  },
+  {
+    id: "b82f9168-5a71-4f27-b1bc-4aadc745db8b",
+    productId: productOsazeCharcoalShampooBar.id,
+    source: "brand",
+    submittedBy: ACTOR.brandRep,
+    description: "Updated certificate of analysis after a stability re-test of the current formula.",
+    createdAt: "2026-07-08T11:15:00Z",
   },
 
   // Osaze Grooming Co. — Cocoa Pomade: 2 pieces, 2 sources.
@@ -1388,7 +1424,8 @@ export const SEED_EVIDENCE: Evidence[] = [
     createdAt: "2026-06-23T11:15:00Z",
   },
 
-  // Ẹwà Botanicals — Moringa Hair Butter: 1 piece, brand-only.
+  // Ẹwà Botanicals — Moringa Hair Butter: 2 pieces, both brand — a
+  // follow-up certificate about seven weeks after registration.
   {
     id: "5668260c-cfab-49ec-a2a7-1d080bede556",
     productId: productEwaMoringaHairButter.id,
@@ -1396,6 +1433,14 @@ export const SEED_EVIDENCE: Evidence[] = [
     submittedBy: ACTOR.brandRep,
     description: "Product registration and ingredient declaration, NAFDAC reg. no. E9-3312.",
     createdAt: "2026-05-30T12:15:00Z",
+  },
+  {
+    id: "0671d84d-75cb-448f-9bbf-735f62d0af3f",
+    productId: productEwaMoringaHairButter.id,
+    source: "brand",
+    submittedBy: ACTOR.brandRep,
+    description: "Updated certificate of analysis after a stability re-test of the current formula.",
+    createdAt: "2026-07-18T12:15:00Z",
   },
 
   // Ẹwà Botanicals — Rice Water Strengthening Spray: 2 pieces, 2 sources.
@@ -1465,7 +1510,8 @@ export const SEED_EVIDENCE: Evidence[] = [
     createdAt: "2026-06-16T14:45:00Z",
   },
 
-  // Lagos Glow Cosmetics — Dewy Finish Foundation: 1 piece, brand-only.
+  // Lagos Glow Cosmetics — Dewy Finish Foundation: 2 pieces, both brand —
+  // a follow-up certificate about six weeks after registration.
   {
     id: "c01f0fcf-8a9b-4f93-847e-bb5b8fa4ebaa",
     productId: productLagosGlowFoundation.id,
@@ -1474,8 +1520,17 @@ export const SEED_EVIDENCE: Evidence[] = [
     description: "Product registration and ingredient declaration, NAFDAC reg. no. L4-4488.",
     createdAt: "2026-06-06T13:15:00Z",
   },
+  {
+    id: "ee731d97-7058-4932-98ee-a1dad9113c14",
+    productId: productLagosGlowFoundation.id,
+    source: "brand",
+    submittedBy: ACTOR.brandRep,
+    description: "Updated certificate of analysis after a stability re-test of the current formula.",
+    createdAt: "2026-07-17T13:15:00Z",
+  },
 
-  // Lagos Glow Cosmetics — Ankara Bloom Eau de Parfum: 1 piece, brand-only.
+  // Lagos Glow Cosmetics — Ankara Bloom Eau de Parfum: 2 pieces, 2 sources
+  // — a retailer confirmation about five weeks after registration.
   {
     id: "edf77da4-ac60-4910-8ee8-10e5f0704c22",
     productId: productLagosGlowAnkaraBloomEDP.id,
@@ -1483,6 +1538,14 @@ export const SEED_EVIDENCE: Evidence[] = [
     submittedBy: ACTOR.brandRep,
     description: "Product registration and ingredient declaration, NAFDAC reg. no. L4-4495.",
     createdAt: "2026-06-10T13:15:00Z",
+  },
+  {
+    id: "c303f655-4ff9-4a15-9a42-374f3accf96a",
+    productId: productLagosGlowAnkaraBloomEDP.id,
+    source: "retailer",
+    submittedBy: ACTOR.retailerStaff,
+    description: "Retailer confirms consistent stock sourced directly from Lagos Glow Cosmetics since launch.",
+    createdAt: "2026-07-15T14:45:00Z",
   },
 
   // Lagos Glow Cosmetics — Citrus Musk Body Mist: 1 piece, brand-only.
@@ -1688,7 +1751,8 @@ export const SEED_EVIDENCE: Evidence[] = [
     createdAt: "2026-07-30T14:45:00Z",
   },
 
-  // Ifeoma Beauty Studio — Waterproof Eyeliner Pen: 1 piece, brand-only.
+  // Ifeoma Beauty Studio — Waterproof Eyeliner Pen: 2 pieces, 2 sources —
+  // a consumer photo about three weeks after registration.
   {
     id: "8740c67d-2ef1-42d4-a0a2-497ea948240c",
     productId: productIfeomaWaterproofEyelinerPen.id,
@@ -1696,6 +1760,14 @@ export const SEED_EVIDENCE: Evidence[] = [
     submittedBy: ACTOR.brandRep,
     description: "Product registration and ingredient declaration, NAFDAC reg. no. I3-1032.",
     createdAt: "2026-07-23T10:15:00Z",
+  },
+  {
+    id: "506e7fe5-f646-4450-bc6a-f66026d48ede",
+    productId: productIfeomaWaterproofEyelinerPen.id,
+    source: "consumer",
+    submittedBy: ACTOR.consumer,
+    description: "Consumer submitted packaging photos matching the official listing after a verified purchase.",
+    createdAt: "2026-08-13T15:00:00Z",
   },
 
   // Ifeoma Beauty Studio — Volumizing Mascara: 2 pieces, 1 source (brand twice).
